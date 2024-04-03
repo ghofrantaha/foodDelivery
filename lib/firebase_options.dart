@@ -45,17 +45,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyAGwjFkCH0JczSMe__lBzp9wDe9qg-_-xs',
-    appId: '1:438699557837:web:a740c12c5553c379a27a84',
+    appId: '1:438699557837:web:31c017172caddb5ea27a84',
     messagingSenderId: '438699557837',
     projectId: 'flutter-deliveryfood',
     authDomain: 'flutter-deliveryfood.firebaseapp.com',
     storageBucket: 'flutter-deliveryfood.appspot.com',
-    measurementId: 'G-PT8Y9R998F',
+    measurementId: 'G-RW1QJQZSGP',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBEZPMSuxyQp22F7mzjFkFOBxlp9bnEpUA',
-    appId: '1:438699557837:android:32858f2c3054e0daa27a84',
+    appId: '1:438699557837:android:d2946cf94a05c2ada27a84',
     messagingSenderId: '438699557837',
     projectId: 'flutter-deliveryfood',
     storageBucket: 'flutter-deliveryfood.appspot.com',
@@ -63,7 +63,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBAgAOogeyxnQAqOL0QP6EGBgc6Yxg9aQM',
-    appId: '1:438699557837:ios:527c8db01972e680a27a84',
+    appId: '1:438699557837:ios:f7e430133bc70955a27a84',
     messagingSenderId: '438699557837',
     projectId: 'flutter-deliveryfood',
     storageBucket: 'flutter-deliveryfood.appspot.com',
@@ -72,7 +72,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyBAgAOogeyxnQAqOL0QP6EGBgc6Yxg9aQM',
-    appId: '1:438699557837:ios:527c8db01972e680a27a84',
+    appId: '1:438699557837:ios:f7e430133bc70955a27a84',
     messagingSenderId: '438699557837',
     projectId: 'flutter-deliveryfood',
     storageBucket: 'flutter-deliveryfood.appspot.com',

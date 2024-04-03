@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foody/views/widgets/locall_list_item_home.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/database_controller.dart';
@@ -22,7 +23,7 @@ class HomePage extends StatelessWidget {
           Stack(
             alignment: Alignment.bottomLeft,
             children: [
-              Image.network(
+              Image.asset(
                 AppAssets.topBannerHomePageAsset,
                 width: double.infinity,
                 height: size.height * 0.3,
@@ -67,29 +68,51 @@ class HomePage extends StatelessWidget {
                   child: StreamBuilder<List<Product>>(
                       stream: database.salesProductsStream(),
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.active) {
-                          final products = snapshot.data;
-                          if (products == null || products.isEmpty) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.waiting:
                             return const Center(
-                              child: Text('No Data Available!'),
-                            );
-                          }
-                          return ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: products.length,
-                            itemBuilder: (_, int index) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ListItemHome(
-                                product: products[index],
-                                isNew: false,
-                              ),
-                            ),
-                          );
+                                child: CircularProgressIndicator());
+                          case ConnectionState.active:
+                            if (snapshot.data == null) {
+                              return Center(child: Text(snapshot.error!.toString()));
+                            } else if (snapshot.data!.isEmpty) {
+                              return const Center(
+                                  child: Text('No Data Available!'));
+                            } else {
+                              return ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: snapshot.data!.length,
+                                itemBuilder: (_, int index) => Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ListItemHome(
+                                    product: snapshot.data![index],
+                                    isNew: false,
+                                  ),
+                                ),
+                              );
+                            }
+                          case ConnectionState.done:
+                            if (snapshot.data == null) {
+                              return Center(child: Text(snapshot.error!.toString()));
+                            } else if (snapshot.data!.isEmpty) {
+                              return const Center(
+                                  child: Text('No Data Available!'));
+                            } else {
+                              return ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: snapshot.data!.length,
+                                itemBuilder: (_, int index) => Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ListItemHome(
+                                    product: snapshot.data![index],
+                                    isNew: false,
+                                  ),
+                                ),
+                              );
+                            }
+                          default:
+                            return const SizedBox();
                         }
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
                       }),
                 ),
                 const SizedBox(height: 12.0),
@@ -106,7 +129,7 @@ class HomePage extends StatelessWidget {
                       itemCount: productsList.length,
                       itemBuilder: (_, int index) => Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: ListItemHome(
+                        child: LocalListItemHome(
                           product: productsList[index],
                           isNew: true,
                         ),
