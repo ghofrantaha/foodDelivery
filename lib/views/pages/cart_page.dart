@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +8,7 @@ import '../widgets/cart_list_item.dart';
 import '../widgets/main_button.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({Key? key}) : super(key: key);
+  const CartPage({super.key});
 
   @override
   State<CartPage> createState() => _CartPageState();
@@ -24,11 +23,11 @@ class _CartPageState extends State<CartPage> {
     final myProducts = await Provider.of<Database>(context, listen: false)
         .myProductsCart()
         .first;
-    myProducts.forEach((element) {
+    for (var element in myProducts) {
       setState(() {
         totalAmount += element.price;
       });
-    });
+    }
   }
 
   @override
@@ -62,17 +61,20 @@ class _CartPageState extends State<CartPage> {
                       const SizedBox(height: 16.0),
                       Text(
                         'My Cart',
-                        style: Theme.of(context).textTheme.headline4!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium!
+                            .copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                       ),
                       const SizedBox(height: 16.0),
                       if (cartItems == null || cartItems.isEmpty)
                         Center(
                           child: Text(
                             'No Data Available!',
-                            style: Theme.of(context).textTheme.subtitle1,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
                       if (cartItems != null && cartItems.isNotEmpty)
@@ -88,10 +90,10 @@ class _CartPageState extends State<CartPage> {
                           },
                         ),
                       const SizedBox(height: 24.0),
-                      OrderSummaryComponent(
-                        title: 'Total Amount',
-                        value: totalAmount.toString(),
-                      ),
+                      // OrderSummaryComponent(
+                      //   title: 'Total Amount',
+                      //   value: totalAmount.toString(),
+                      // ),
                       const SizedBox(height: 32.0),
                       MainButton(
                         text: 'Checkout',

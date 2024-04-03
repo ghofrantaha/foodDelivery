@@ -6,13 +6,13 @@ import '../../controllers/database_controller.dart';
 import '../../models/product.dart';
 import '../../utilities/routes.dart';
 
-class ListItemHome extends StatelessWidget {
+class LocalListItemHome extends StatelessWidget {
   final Product product;
   final bool isNew;
   final VoidCallback? addToFavorites;
   final bool isFavorite;
 
-  const ListItemHome({
+  const LocalListItemHome({
     super.key,
     required this.product,
     required this.isNew,
@@ -36,7 +36,7 @@ class ListItemHome extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(12.0),
-                child: Image.network(
+                child: Image.asset(
                   product.imgUrl,
                   width: 200,
                   height: 200,

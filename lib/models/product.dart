@@ -34,12 +34,12 @@ class Product {
   factory Product.fromMap(Map<String, dynamic> map, String documentId) {
     return Product(
       id: documentId,
-      title: map['title'] as String,
-      price: map['price'] as int,
-      imgUrl: map['imgUrl'] as String,
-      discountValue: map['discountValue'] as int,
-      category: map['category'] as String,
-      rate: map['rate'] as int,
+      category: map['category'],
+      discountValue: map['discountValue'],
+      imgUrl: map['imgUrl'],
+      price: map['price'],
+      title: map['title'],
+      rate: map['rate'],
     );
   }
 }

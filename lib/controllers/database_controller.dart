@@ -18,21 +18,20 @@ class FirestoreDatabase implements Database {
 
   FirestoreDatabase(this.uid);
 
-  Stream<List<Product>> productsStream() => _service.collectionsStream(
+  Stream<List<Product>> productsStream() => _service.collectionsStream<Product>(
         path: 'products/',
         builder: (data, documentId) => Product.fromMap(data!, documentId),
         queryBuilder: (query) => query.where('discountValue', isNotEqualTo: 0),
       );
 
   @override
-  Stream<List<Product>> salesProductsStream() => _service.collectionsStream(
-        path: ApiPath.products(),
-        builder: (data, documentId) => Product.fromMap(data!, documentId),
-        queryBuilder: (query) => query.where('discountValue', isNotEqualTo: 0),
+  Stream<List<Product>> salesProductsStream() => FirestoreServices.instance.collectionsStream<Product>(
+        path: 'products/',
+        builder: (data, id) => Product.fromMap(data!, id),
       );
 
   @override
-  Stream<List<Product>> newProductsStream() => _service.collectionsStream(
+  Stream<List<Product>> newProductsStream() => _service.collectionsStream<Product>(
         path: ApiPath.products(),
         builder: (data, documentId) => Product.fromMap(data!, documentId),
       );
@@ -55,7 +54,7 @@ class FirestoreDatabase implements Database {
   );
 
   @override
-  Stream<List<AddToCartModel>> myProductsCart() => _service.collectionsStream(
+  Stream<List<AddToCartModel>> myProductsCart() => _service.collectionsStream<AddToCartModel>(
     path: ApiPath.myProductsCart(uid),
     builder: (data, documentId) =>
         AddToCartModel.fromMap(data!, documentId),

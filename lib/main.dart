@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:foody/services/auth.dart';
-import 'package:foody/utilities/app_theme.dart';
 import 'package:foody/utilities/router.dart';
 import 'package:foody/utilities/routes.dart';
 import 'package:provider/provider.dart';
@@ -21,12 +20,11 @@ class FoodyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   Provider<AuthBase>(
+    return Provider<AuthBase>(
       create: (_) => Auth(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Ecommerce App',
-        // TODO: Refactor this theme away from the main file
         theme: ThemeData(
             scaffoldBackgroundColor: const Color(0xFFE5E5E5),
             primaryColor: Colors.teal,
@@ -38,7 +36,7 @@ class FoodyApp extends StatelessWidget {
               ),
             ),
             inputDecorationTheme: InputDecorationTheme(
-              labelStyle: Theme.of(context).textTheme.subtitle1,
+              labelStyle: Theme.of(context).textTheme.titleMedium,
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16.0),
                 borderSide: const BorderSide(

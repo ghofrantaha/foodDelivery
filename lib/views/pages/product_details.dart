@@ -12,9 +12,9 @@ import '../widgets/main_dialog.dart';
 class ProductDetails extends StatefulWidget {
   final Product product;
   const ProductDetails({
-    Key? key,
+    super.key,
     required this.product,
-  }) : super(key: key);
+  });
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
@@ -53,7 +53,7 @@ class _ProductDetailsState extends State<ProductDetails> {
       appBar: AppBar(
         title: Text(
           widget.product.title,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         actions: [
           IconButton(
@@ -89,7 +89,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                         child: SizedBox(
                           height: 60,
                           child: DropDownMenuComponent(
-                            items: const ['S', 'M', 'L',],
+                            items: const [
+                              'S',
+                              'M',
+                              'L',
+                            ],
                             hint: 'Size',
                             onChanged: (String? newValue) {
                               setState(() {
@@ -121,9 +125,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 isFavorite
                                     ? Icons.favorite
                                     : Icons.favorite_border_outlined,
-                                color: isFavorite
-                                    ? Colors.teal
-                                    : Colors.black45,
+                                color:
+                                    isFavorite ? Colors.teal : Colors.black45,
                                 size: 30,
                               ),
                             ),
@@ -138,15 +141,17 @@ class _ProductDetailsState extends State<ProductDetails> {
                     children: [
                       Text(
                         widget.product.title,
-                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                ),
                       ),
                       Text(
                         '\$${widget.product.price}',
-                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style:
+                            Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                ),
                       ),
                     ],
                   ),
@@ -154,8 +159,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                   Text(
                     widget.product.category,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: Colors.black54,
-                    ),
+                          color: Colors.black54,
+                        ),
                   ),
                   const SizedBox(height: 16.0),
                   Text(
