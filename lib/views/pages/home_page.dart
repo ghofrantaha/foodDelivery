@@ -74,7 +74,7 @@ class HomePage extends StatelessWidget {
                                 child: CircularProgressIndicator());
                           case ConnectionState.active:
                             if (snapshot.data == null) {
-                              return Center(child: Text(snapshot.error!.toString()));
+                              return const Center(child: Text('Error Happen!'));
                             } else if (snapshot.data!.isEmpty) {
                               return const Center(
                                   child: Text('No Data Available!'));
@@ -93,7 +93,7 @@ class HomePage extends StatelessWidget {
                             }
                           case ConnectionState.done:
                             if (snapshot.data == null) {
-                              return Center(child: Text(snapshot.error!.toString()));
+                              return const Center(child: Text('Error Happen!'));
                             } else if (snapshot.data!.isEmpty) {
                               return const Center(
                                   child: Text('No Data Available!'));
