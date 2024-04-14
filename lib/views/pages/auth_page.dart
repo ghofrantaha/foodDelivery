@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foody/controllers/auth_controller.dart';
+import 'package:foodapp/controllers/auth_controller.dart';
 import 'package:provider/provider.dart';
 
 import '../../utilities/enums.dart';
@@ -48,8 +48,6 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Consumer<AuthController>(builder: (_, model, __) {
       return Scaffold(
         body: SafeArea(

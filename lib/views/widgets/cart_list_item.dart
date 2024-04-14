@@ -6,9 +6,9 @@ import '../../models/add_to_cart_model.dart';
 class CartListItem extends StatelessWidget {
   final AddToCartModel cartItem;
   const CartListItem({
-    Key? key,
+    super.key,
     required this.cartItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class CartListItem extends StatelessWidget {
                   children: [
                     Text(
                       cartItem.title,
-                      style: Theme.of(context).textTheme.headline6!.copyWith(
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -55,7 +55,7 @@ class CartListItem extends StatelessWidget {
                                   text: 'Color: ',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .caption!
+                                      .bodySmall!
                                       .copyWith(
                                     color: Colors.grey,
                                   )),
@@ -63,7 +63,7 @@ class CartListItem extends StatelessWidget {
                                 text: cartItem.color,
                                 style: Theme.of(context)
                                     .textTheme
-                                    .caption!
+                                    .bodySmall!
                                     .copyWith(
                                   color: Colors.black,
                                 ),
@@ -79,7 +79,7 @@ class CartListItem extends StatelessWidget {
                                   text: 'Size: ',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .caption!
+                                      .bodySmall!
                                       .copyWith(
                                     color: Colors.grey,
                                   )),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foody/views/widgets/locall_list_item_home.dart';
+import 'package:foodapp/utilities/media_query_extension.dart';
+import 'package:foodapp/views/widgets/locall_list_item_home.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/database_controller.dart';
@@ -13,9 +14,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final Database database = Provider.of<Database>(context);
-
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,16 +24,13 @@ class HomePage extends StatelessWidget {
               Image.asset(
                 AppAssets.topBannerHomePageAsset,
                 width: double.infinity,
-                height: size.height * 0.3,
+                height: context.height * 0.3,
                 fit: BoxFit.cover,
               ),
-              Opacity(
-                opacity: 0.3,
-                child: Container(
-                  width: double.infinity,
-                  height: size.height * 0.3,
-                  color: Colors.black,
-                ),
+              Container(
+                width: double.infinity,
+                height: context.height * 0.3,
+                color: Colors.black.withOpacity(0.3),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -52,11 +47,21 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 24.0),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
             child: Column(
               children: [
+                SearchBar(
+                  hintText: 'Search for food ...',
+                  leading: const Icon(Icons.fastfood_outlined),
+                  trailing: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.search),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
                 HeaderOfList(
                   onTap: () {},
                   title: 'Offers',
@@ -66,7 +71,7 @@ class HomePage extends StatelessWidget {
                 SizedBox(
                   height: 330,
                   child: StreamBuilder<List<Product>>(
-                      stream: database.salesProductsStream(),
+                      stream: context.read<Database>().salesProductsStream(),
                       builder: (context, snapshot) {
                         switch (snapshot.connectionState) {
                           case ConnectionState.waiting:
@@ -123,18 +128,19 @@ class HomePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 8.0),
                 SizedBox(
-                    height: 330,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: productsList.length,
-                      itemBuilder: (_, int index) => Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: LocalListItemHome(
-                          product: productsList[index],
-                          isNew: true,
-                        ),
+                  height: 330,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: productsList.length,
+                    itemBuilder: (_, int index) => Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: LocalListItemHome(
+                        product: productsList[index],
+                        isNew: true,
                       ),
-                    )),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

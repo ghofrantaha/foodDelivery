@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:foodapp/utilities/media_query_extension.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/database_controller.dart';
@@ -22,13 +23,13 @@ class ListItemHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final database = Provider.of<Database>(context);
-
     return InkWell(
       onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(
         AppRoutes.productDetailsRoute,
-        arguments: {'product': product, 'database': database},
+        arguments: {
+          'product': product,
+          'database': context.read<Database>(),
+        },
       ),
       child: Stack(
         children: [
@@ -45,26 +46,23 @@ class ListItemHome extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
+                child: Container(
                   width: 50,
                   height: 25,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16.0),
-                      color: isNew
-                          ? Colors.black
-                          : const Color.fromARGB(255, 244, 124, 54),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Center(
-                        child: Text(
-                          isNew ? 'NEW' : '${product.discountValue}%',
-                          style:
-                              Theme.of(context).textTheme.bodySmall!.copyWith(
-                                    color: Colors.white,
-                                  ),
-                        ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.0),
+                    color: isNew
+                        ? Colors.black
+                        : const Color.fromARGB(255, 244, 124, 54),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Center(
+                      child: Text(
+                        isNew ? 'NEW' : '${product.discountValue}%',
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              color: Colors.white,
+                            ),
                       ),
                     ),
                   ),
@@ -72,10 +70,9 @@ class ListItemHome extends StatelessWidget {
               ),
             ],
           ),
-          // TODO: Create one component for the favorite button
           Positioned(
-            left: size.width * 0.38,
-            bottom: size.height * 0.12,
+            left: context.width * 0.38,
+            bottom: context.height * 0.12,
             child: Container(
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
@@ -129,24 +126,27 @@ class ListItemHome extends StatelessWidget {
                 const SizedBox(height: 8.0),
                 Text(
                   product.category,
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: Colors.grey,
-                      ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .copyWith(color: Colors.grey),
                 ),
                 const SizedBox(height: 6.0),
                 Text(
                   product.title,
-                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium!
+                      .copyWith(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 6.0),
                 isNew
                     ? Text(
                         '${product.price}\$',
-                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                              color: Colors.grey,
-                            ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall!
+                            .copyWith(color: Colors.grey),
                       )
                     : Text.rich(
                         TextSpan(
@@ -167,9 +167,7 @@ class ListItemHome extends StatelessWidget {
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
-                                  .copyWith(
-                                    color: Colors.red,
-                                  ),
+                                  .copyWith(color: Colors.red),
                             ),
                           ],
                         ),

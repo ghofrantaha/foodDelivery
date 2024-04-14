@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/utilities/media_query_extension.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/database_controller.dart';
@@ -22,7 +23,7 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   bool isFavorite = false;
-  late String dropdownValue;
+  String dropdownValue = 'M';
 
   Future<void> _addToCart(Database database) async {
     try {
@@ -35,6 +36,11 @@ class _ProductDetailsState extends State<ProductDetails> {
         size: dropdownValue,
       );
       await database.addToCart(addToCartProduct);
+      return MainDialog(
+        context: context,
+        title: 'Success',
+        content: '${widget.product.title} added to the cart',
+      ).showAlertDialog();
     } catch (e) {
       return MainDialog(
         context: context,
@@ -46,9 +52,6 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final database = Provider.of<Database>(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -69,9 +72,9 @@ class _ProductDetailsState extends State<ProductDetails> {
           children: [
             Image.network(
               widget.product.imgUrl,
-              width: double.infinity,
-              height: size.height * 0.55,
               fit: BoxFit.cover,
+              width: double.infinity,
+              height: context.height * 0.55,
             ),
             const SizedBox(height: 8.0),
             Padding(
@@ -96,39 +99,33 @@ class _ProductDetailsState extends State<ProductDetails> {
                             ],
                             hint: 'Size',
                             onChanged: (String? newValue) {
-                              setState(() {
-                                dropdownValue = newValue!;
-                              });
+                              setState(() => dropdownValue = newValue!);
                             },
                           ),
                         ),
                       ),
                       const Spacer(),
-                      // TODO: Create one component for the favorite button
                       InkWell(
                         onTap: () {
                           setState(() {
                             isFavorite = !isFavorite;
                           });
                         },
-                        child: SizedBox(
+                        child: Container(
                           height: 60,
                           width: 60,
-                          child: DecoratedBox(
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Icon(
-                                isFavorite
-                                    ? Icons.favorite
-                                    : Icons.favorite_border_outlined,
-                                color:
-                                    isFavorite ? Colors.teal : Colors.black45,
-                                size: 30,
-                              ),
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Icon(
+                              isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border_outlined,
+                              color: isFavorite ? Colors.teal : Colors.black45,
+                              size: 30,
                             ),
                           ),
                         ),
@@ -170,7 +167,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   const SizedBox(height: 24.0),
                   MainButton(
                     text: 'Add to cart',
-                    onTap: () => _addToCart(database),
+                    onTap: () => _addToCart(context.read<Database>()),
                     hasCircularBorder: true,
                   ),
                   const SizedBox(height: 32.0),

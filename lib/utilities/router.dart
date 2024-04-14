@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:foody/utilities/routes.dart';
+import 'package:foodapp/utilities/routes.dart';
 import 'package:provider/provider.dart';
 import '../controllers/database_controller.dart';
 import '../views/pages/button_navbar.dart';
