@@ -72,7 +72,6 @@ class LocalListItemHome extends StatelessWidget {
               ),
             ],
           ),
-          // TODO: Create one component for the favorite button
           Positioned(
             left: size.width * 0.38,
             bottom: size.height * 0.12,

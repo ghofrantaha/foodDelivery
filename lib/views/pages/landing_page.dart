@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:foody/controllers/auth_controller.dart';
-import 'package:foody/views/pages/auth_page.dart';
-import 'package:foody/views/pages/button_navbar.dart';
+import 'package:foodapp/controllers/auth_controller.dart';
+import 'package:foodapp/views/pages/auth_page.dart';
+import 'package:foodapp/views/pages/button_navbar.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/database_controller.dart';

@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:foody/services/auth.dart';
-import 'package:foody/utilities/router.dart';
-import 'package:foody/utilities/routes.dart';
+import 'package:foodapp/services/auth.dart';
+import 'package:foodapp/utilities/router.dart';
+import 'package:foodapp/utilities/routes.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
@@ -31,9 +31,7 @@ class FoodyApp extends StatelessWidget {
             appBarTheme: const AppBarTheme(
               backgroundColor: Colors.white,
               elevation: 2,
-              iconTheme: IconThemeData(
-                color: Colors.black,
-              ),
+              iconTheme: IconThemeData(color: Colors.black),
             ),
             inputDecorationTheme: InputDecorationTheme(
               labelStyle: Theme.of(context).textTheme.titleMedium,

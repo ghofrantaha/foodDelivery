@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:foody/services/auth.dart';
-import 'package:foody/utilities/enums.dart';
+import 'package:foodapp/services/auth.dart';
+import 'package:foodapp/utilities/enums.dart';
 
 import '../models/user_data.dart';
 import '../utilities/constants.dart';
