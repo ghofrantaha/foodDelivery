@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:foodapp/views/pages/cart_page.dart';
 import 'package:foodapp/views/pages/profile_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -17,8 +18,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
   List<Widget> _buildScreens() {
     return [
       const HomePage(),
-      Container(),
-      Container(),
+      const CartPage(),
       Container(),
       const ProfilePage(),
     ];
@@ -29,12 +29,6 @@ class _BottomNavbarState extends State<BottomNavbar> {
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.home),
         title: ("Home"),
-        activeColorPrimary: CupertinoColors.systemTeal,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.bag),
-        title: ("shop"),
         activeColorPrimary: CupertinoColors.systemTeal,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),

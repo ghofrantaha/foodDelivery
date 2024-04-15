@@ -91,7 +91,7 @@ class ListItemHome extends StatelessWidget {
                   onTap: addToFavorites,
                   child: Icon(
                     isFavorite ? Icons.favorite : Icons.favorite_outline,
-                    size: 10.0,
+                    size: 20,
                     color: isFavorite ? Colors.red : Colors.grey,
                   ),
                 ),
