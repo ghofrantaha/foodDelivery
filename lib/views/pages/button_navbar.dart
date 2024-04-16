@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodapp/views/pages/cart_page.dart';
+import 'package:foodapp/views/pages/fav_page.dart';
 import 'package:foodapp/views/pages/profile_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -19,7 +20,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
     return [
       const HomePage(),
       const CartPage(),
-      Container(),
+      const FavoritesPage(),
       const ProfilePage(),
     ];
   }

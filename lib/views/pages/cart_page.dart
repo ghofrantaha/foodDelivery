@@ -32,11 +32,9 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    final database = Provider.of<Database>(context);
-
     return SafeArea(
       child: StreamBuilder<List<AddToCartModel>>(
-          stream: database.myProductsCart(),
+          stream: context.read<Database>().myProductsCart(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               final cartItems = snapshot.data;
@@ -100,7 +98,7 @@ class _CartPageState extends State<CartPage> {
                         onTap: () => Navigator.of(context, rootNavigator: true)
                             .pushNamed(
                           AppRoutes.checkoutPageRoute,
-                          arguments: database,
+                          arguments: context.read<Database>(),
                         ),
                         hasCircularBorder: true,
                       ),

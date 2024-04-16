@@ -50,6 +50,30 @@ class _ProductDetailsState extends State<ProductDetails> {
     }
   }
 
+  Future<void> _addToFavorites(Database database) async {
+    try {
+      await database.addToFavorites(widget.product);
+    } catch (e) {
+      return MainDialog(
+        context: context,
+        title: 'Error',
+        content: 'Couldn\'t adding to Favorites, please try again!',
+      ).showAlertDialog();
+    }
+  }
+
+  Future<void> _removefromFavorites(Database database) async {
+    try {
+      await database.removefromFavorites(widget.product.id);
+    } catch (e) {
+      return MainDialog(
+        context: context,
+        title: 'Error',
+        content: 'Couldn\'t removing from Favorites, please try again!',
+      ).showAlertDialog();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,9 +131,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                       const Spacer(),
                       InkWell(
                         onTap: () {
-                          setState(() {
-                            isFavorite = !isFavorite;
-                          });
+                          if (isFavorite)
+                            _removefromFavorites(context.read<Database>());
+                          else
+                            _addToFavorites(context.read<Database>());
+                          setState(() => isFavorite = !isFavorite);
                         },
                         child: Container(
                           height: 60,

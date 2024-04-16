@@ -1,25 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodapp/utilities/media_query_extension.dart';
+import 'package:foodapp/views/widgets/main_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../../controllers/database_controller.dart';
 import '../../models/product.dart';
 import '../../utilities/routes.dart';
 
-class ListItemHome extends StatelessWidget {
+class ListItemHome extends StatefulWidget {
   final Product product;
   final bool isNew;
-  final VoidCallback? addToFavorites;
-  final bool isFavorite;
 
   const ListItemHome({
     super.key,
     required this.product,
     required this.isNew,
-    this.addToFavorites,
-    this.isFavorite = false,
   });
+
+  @override
+  State<ListItemHome> createState() => _ListItemHomeState();
+}
+
+class _ListItemHomeState extends State<ListItemHome> {
+  bool isFavorite = false;
+
+  Future<void> _addToFavorites(Database database) async {
+    try {
+      await database.addToFavorites(widget.product);
+    } catch (e) {
+      return MainDialog(
+        context: context,
+        title: 'Error',
+        content: 'Couldn\'t adding to Favorites, please try again!',
+      ).showAlertDialog();
+    }
+  }
+
+  Future<void> _removefromFavorites(Database database) async {
+    try {
+      await database.removefromFavorites(widget.product.id);
+    } catch (e) {
+      return MainDialog(
+        context: context,
+        title: 'Error',
+        content: 'Couldn\'t removing from Favorites, please try again!',
+      ).showAlertDialog();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +55,7 @@ class ListItemHome extends StatelessWidget {
       onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(
         AppRoutes.productDetailsRoute,
         arguments: {
-          'product': product,
+          'product': widget.product,
           'database': context.read<Database>(),
         },
       ),
@@ -38,7 +66,7 @@ class ListItemHome extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(12.0),
                 child: Image.network(
-                  product.imgUrl,
+                  widget.product.imgUrl,
                   width: 200,
                   height: 200,
                   fit: BoxFit.cover,
@@ -51,7 +79,7 @@ class ListItemHome extends StatelessWidget {
                   height: 25,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16.0),
-                    color: isNew
+                    color: widget.isNew
                         ? Colors.black
                         : const Color.fromARGB(255, 244, 124, 54),
                   ),
@@ -59,7 +87,9 @@ class ListItemHome extends StatelessWidget {
                     padding: const EdgeInsets.all(4.0),
                     child: Center(
                       child: Text(
-                        isNew ? 'NEW' : '${product.discountValue}%',
+                        widget.isNew
+                            ? 'NEW'
+                            : '${widget.product.discountValue}%',
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                               color: Colors.white,
                             ),
@@ -88,7 +118,13 @@ class ListItemHome extends StatelessWidget {
                 backgroundColor: Colors.white,
                 radius: 15,
                 child: InkWell(
-                  onTap: addToFavorites,
+                  onTap: () {
+                    if (isFavorite)
+                      _removefromFavorites(context.read<Database>());
+                    else
+                      _addToFavorites(context.read<Database>());
+                    setState(() => isFavorite = !isFavorite);
+                  },
                   child: Icon(
                     isFavorite ? Icons.favorite : Icons.favorite_outline,
                     size: 20,
@@ -107,7 +143,7 @@ class ListItemHome extends StatelessWidget {
                   children: [
                     RatingBarIndicator(
                       itemSize: 25.0,
-                      rating: product.rate?.toDouble() ?? 4.0,
+                      rating: widget.product.rate?.toDouble() ?? 4.0,
                       itemBuilder: (context, _) => const Icon(
                         Icons.star,
                         color: Color.fromARGB(255, 241, 217, 100),
@@ -125,7 +161,7 @@ class ListItemHome extends StatelessWidget {
                 ),
                 const SizedBox(height: 8.0),
                 Text(
-                  product.category,
+                  widget.product.category,
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall!
@@ -133,16 +169,16 @@ class ListItemHome extends StatelessWidget {
                 ),
                 const SizedBox(height: 6.0),
                 Text(
-                  product.title,
+                  widget.product.title,
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!
                       .copyWith(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 6.0),
-                isNew
+                widget.isNew
                     ? Text(
-                        '${product.price}\$',
+                        '${widget.product.price}\$',
                         style: Theme.of(context)
                             .textTheme
                             .titleSmall!
@@ -152,7 +188,7 @@ class ListItemHome extends StatelessWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: '${product.price}\$  ',
+                              text: '${widget.product.price}\$  ',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
@@ -163,7 +199,7 @@ class ListItemHome extends StatelessWidget {
                             ),
                             TextSpan(
                               text:
-                                  '  ${product.price * (product.discountValue!) / 100}\$',
+                                  '  ${widget.product.price * (widget.product.discountValue!) / 100}\$',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
