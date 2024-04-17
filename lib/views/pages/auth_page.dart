@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/controllers/auth_controller.dart';
 import 'package:provider/provider.dart';
-
+import 'package:url_launcher/url_launcher.dart';
+import '../../utilities/assets.dart';
 import '../../utilities/enums.dart';
 import '../widgets/main_button.dart';
+import '../widgets/social_media_button.dart';
 
 class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
@@ -23,6 +25,14 @@ class _AuthPageState extends State<AuthPage> {
     _passwordController.dispose();
     _emailController.dispose();
     super.dispose();
+  }
+  void _launchURL(String url) async {
+    Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   Future<void> _submit(AuthController model) async {
@@ -156,37 +166,24 @@ class _AuthPageState extends State<AuthPage> {
                           model.authFormType == AuthFormType.login
                               ? 'or login with '
                               : 'or Register with',
-                          style: Theme.of(context).textTheme.titleMedium,
+                          style: Theme.of(context).textTheme.subtitle1,
                         )),
-                    const SizedBox(
-                      height: 16.0,
-                    ),
+                    const SizedBox(height: 16.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          height: 89,
-                          width: 89,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16.0),
-                            color: Colors.white,
-                          ),
-                          child: const Icon(Icons.mail),
+                        SocialMediaButton(
+                          iconName: AppAssets.facebookIcon,
+                          onPress: () {_launchURL('https://facebook.com/login');},
                         ),
-                        const SizedBox(
-                          width: 16.0,
+                        const SizedBox(width: 16.0),
+                        SocialMediaButton(
+                          iconName: AppAssets.googleIcon,
+                          onPress: () { _launchURL('https://example.com/google-login');
+                            },
                         ),
-                        Container(
-                          height: 89,
-                          width: 89,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16.0),
-                            color: Colors.white,
-                          ),
-                          child: const Icon(Icons.facebook),
-                        )
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -194,6 +191,7 @@ class _AuthPageState extends State<AuthPage> {
           ),
         ),
       );
-    });
+    },
+    );
   }
 }

@@ -6,6 +6,7 @@ import '../../models/add_to_cart_model.dart';
 import '../../utilities/routes.dart';
 import '../widgets/cart_list_item.dart';
 import '../widgets/main_button.dart';
+import '../widgets/order_summary_component.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -20,7 +21,7 @@ class _CartPageState extends State<CartPage> {
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
-    final myProducts = await Provider.of<Database>(context, listen: false)
+    final myProducts = await Provider.of<Database>(context, listen: true)
         .myProductsCart()
         .first;
     for (var element in myProducts) {
@@ -88,10 +89,10 @@ class _CartPageState extends State<CartPage> {
                           },
                         ),
                       const SizedBox(height: 24.0),
-                      // OrderSummaryComponent(
-                      //   title: 'Total Amount',
-                      //   value: totalAmount.toString(),
-                      // ),
+                       OrderSummaryComponent(
+                         title: 'Total Amount',
+                        value: totalAmount.toString(),
+                      ),
                       const SizedBox(height: 32.0),
                       MainButton(
                         text: 'Checkout',
