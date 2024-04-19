@@ -15,9 +15,11 @@ abstract class Database {
   Stream<List<ShippingAddress>> getShippingAddresses();
   Future<void> setUserData(UserData userData);
   Future<void> addToCart(AddToCartModel product);
+  Future<void> removeFromCart(String productId);
   Future<void> saveAddress(ShippingAddress address);
   Future<void> addToFavorites(Product product);
   Future<void> removefromFavorites(String productId);
+  Stream<List<Product>> searchProductByTitle(String title);
 }
 
 class FirestoreDatabase implements Database {
@@ -34,7 +36,7 @@ class FirestoreDatabase implements Database {
 
   @override
   Stream<List<Product>> salesProductsStream() =>
-      FirestoreServices.instance.collectionsStream<Product>(
+      _service.collectionsStream<Product>(
         path: 'products/',
         builder: (data, id) => Product.fromMap(data!, id),
       );
@@ -64,6 +66,11 @@ class FirestoreDatabase implements Database {
       );
 
   @override
+  Future<void> removeFromCart(String productId) async => _service.deleteData(
+        path: ApiPath.addToFav(uid, productId),
+      );
+
+  @override
   Stream<List<AddToCartModel>> myProductsCart() =>
       _service.collectionsStream<AddToCartModel>(
         path: ApiPath.myProductsCart(uid),
@@ -90,7 +97,6 @@ class FirestoreDatabase implements Database {
         builder: (data, documentId) => Product.fromMap(data!, documentId),
       );
 
-
   @override
   Stream<List<DeliveryMethod>> deliveryMethodsStream() =>
       _service.collectionsStream(
@@ -108,11 +114,18 @@ class FirestoreDatabase implements Database {
 
   @override
   Future<void> saveAddress(ShippingAddress address) => _service.setData(
-    path: ApiPath.newAddress(
-      uid,
-      address.id,
-    ),
-    data: address.toMap(),
-  );
-  }
+        path: ApiPath.newAddress(
+          uid,
+          address.id,
+        ),
+        data: address.toMap(),
+      );
 
+  @override
+  Stream<List<Product>> searchProductByTitle(String title) =>
+      _service.collectionsStream(
+        path: ApiPath.products(),
+        builder: (data, documentId) => Product.fromMap(data!, documentId),
+        queryBuilder: (query) => query.where('title', isEqualTo: title),
+      );
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/utilities/media_query_extension.dart';
+import 'package:foodapp/views/pages/orders_page.dart';
 import 'package:foodapp/views/widgets/profile_item_tile.dart';
 import 'package:provider/provider.dart';
 
@@ -57,8 +58,14 @@ class ProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
-              const ProfileItemTile(
-                  title: 'My Orders', content: 'Already have 12 orders'),
+              ProfileItemTile(
+                title: 'My Orders',
+                content: 'Already have 12 orders',
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const OrdersPage()),
+                ),
+              ),
               const ProfileItemTile(
                   title: 'Shipping Addresses', content: '3 addresses'),
               const ProfileItemTile(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../../widgets/checkout/add_new_card_bottom_sheet.dart';
 import '../../widgets/main_button.dart';
 
@@ -77,7 +76,7 @@ class PaymentMethodsPage extends StatelessWidget {
                       context: context,
                       isScrollControlled: true,
                       builder: (_) {
-                        return AddNewCardBottomSheet();
+                        return const AddNewCardBottomSheet();
                       });
                 },
                 text: 'Add New Card',

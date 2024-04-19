@@ -1,25 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:foodapp/utilities/routes.dart';
+import 'package:foodapp/views/pages/orders_page.dart';
 import 'package:provider/provider.dart';
+
 import '../controllers/database_controller.dart';
+import '../views/pages/auth_page.dart';
 import '../views/pages/button_navbar.dart';
 import '../views/pages/checkout/add_shipping_address_page.dart';
 import '../views/pages/checkout/checkout.dart';
 import '../views/pages/checkout/payment_methods_page.dart';
 import '../views/pages/checkout/shipping_addresses_page.dart';
 import '../views/pages/landing_page.dart';
-import '../views/pages/auth_page.dart';
 import '../views/pages/product_details.dart';
 import 'args_models/add_shipping_address_args.dart';
 
-Route<dynamic> onGenerate(RouteSettings settings){
-  switch(settings.name){
+Route<dynamic> onGenerate(RouteSettings settings) {
+  switch (settings.name) {
     case AppRoutes.loginPageRoute:
-      return  CupertinoPageRoute(builder: (_) =>const AuthPage(), settings:settings);
-
-
+      return CupertinoPageRoute(
+          builder: (_) => const AuthPage(), settings: settings);
+    case AppRoutes.ordersRoute:
+      return CupertinoPageRoute(builder: (_) => const OrdersPage(), settings: settings);
     case AppRoutes.buttonNavBarRoute:
-      return  CupertinoPageRoute(builder: (_) =>const  BottomNavbar(),settings:settings );
+      return CupertinoPageRoute(
+          builder: (_) => const BottomNavbar(), settings: settings);
     case AppRoutes.productDetailsRoute:
       final args = settings.arguments as Map<String, dynamic>;
       final product = args['product'];
@@ -68,8 +72,7 @@ Route<dynamic> onGenerate(RouteSettings settings){
       );
     case AppRoutes.landingPageRoute:
     default:
-      return  CupertinoPageRoute(builder: (_) =>const LandingPage(),settings:settings );
-
-
+      return CupertinoPageRoute(
+          builder: (_) => const LandingPage(), settings: settings);
   }
 }

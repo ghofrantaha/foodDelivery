@@ -6,9 +6,9 @@ import '../../../models/delivery_method.dart';
 class DeliveryMethodItem extends StatelessWidget {
   final DeliveryMethod deliveryMethod;
   const DeliveryMethodItem({
-    Key? key,
+    super.key,
     required this.deliveryMethod,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

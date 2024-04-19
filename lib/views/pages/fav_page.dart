@@ -53,7 +53,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                       if (favItems == null || favItems.isEmpty)
                         Center(
                           child: Text(
-                            'No Data Available!',
+                            'No Favorites yet!',
                             style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),

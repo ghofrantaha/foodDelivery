@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/utilities/media_query_extension.dart';
+import 'package:foodapp/views/pages/search_page.dart';
 import 'package:foodapp/views/widgets/locall_list_item_home.dart';
 import 'package:provider/provider.dart';
 
@@ -37,12 +38,33 @@ class HomePage extends StatelessWidget {
                   horizontal: 24.0,
                   vertical: 16.0,
                 ),
-                child: Text(
-                  'Order Now',
-                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Order Now',
+                      style:
+                          Theme.of(context).textTheme.headlineMedium!.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                    ),
+                    FloatingActionButton(
+                      shape: const CircleBorder(),
+                      backgroundColor: Colors.deepOrangeAccent,
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SearchPage(),
+                        ),
                       ),
+                      child: const Icon(
+                        Icons.search,
+                        size: 35,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -51,17 +73,7 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
             child: Column(
               children: [
-                SearchBar(
-                  hintText: 'Search for food ...',
-                  leading: const Icon(Icons.fastfood_outlined),
-                  trailing: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.search),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 HeaderOfList(
                   onTap: () {},
                   title: 'Offers',

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:foodapp/controllers/database_controller.dart';
+import 'package:foodapp/views/widgets/main_dialog.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/add_to_cart_model.dart';
 
@@ -42,8 +44,8 @@ class CartListItem extends StatelessWidget {
                     Text(
                       cartItem.title,
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
                     const SizedBox(height: 4.0),
                     Row(
@@ -57,16 +59,16 @@ class CartListItem extends StatelessWidget {
                                       .textTheme
                                       .bodySmall!
                                       .copyWith(
-                                    color: Colors.grey,
-                                  )),
+                                        color: Colors.grey,
+                                      )),
                               TextSpan(
                                 text: cartItem.color,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodySmall!
                                     .copyWith(
-                                  color: Colors.black,
-                                ),
+                                      color: Colors.black,
+                                    ),
                               ),
                             ],
                           ),
@@ -81,16 +83,16 @@ class CartListItem extends StatelessWidget {
                                       .textTheme
                                       .bodySmall!
                                       .copyWith(
-                                    color: Colors.grey,
-                                  )),
+                                        color: Colors.grey,
+                                      )),
                               TextSpan(
                                 text: cartItem.size,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodySmall!
                                     .copyWith(
-                                  color: Colors.black,
-                                ),
+                                      color: Colors.black,
+                                    ),
                               ),
                             ],
                           ),
@@ -103,13 +105,30 @@ class CartListItem extends StatelessWidget {
             ),
             Padding(
               padding:
-              const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
+                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   const Icon(Icons.more_vert),
+                  IconButton(
+                    onPressed: () async {
+                      try {
+                        await context
+                            .read<Database>()
+                            .removefromFavorites(cartItem.id);
+                      } catch (e) {
+                        MainDialog(
+                          context: context,
+                          title: 'Error',
+                          content:
+                              'Couldn\'t removing from Favorites, please try again!',
+                        ).showAlertDialog();
+                      }
+                    },
+                    icon: const Icon(Icons.delete),
+                  ),
                   Text(
                     '${cartItem.price}\$',
                     style: Theme.of(context).textTheme.bodyLarge,

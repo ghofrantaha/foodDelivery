@@ -166,7 +166,7 @@ class _AuthPageState extends State<AuthPage> {
                           model.authFormType == AuthFormType.login
                               ? 'or login with '
                               : 'or Register with',
-                          style: Theme.of(context).textTheme.subtitle1,
+                          style: Theme.of(context).textTheme.titleMedium,
                         )),
                     const SizedBox(height: 16.0),
                     Row(

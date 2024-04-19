@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../order_summary_component.dart';
 
 class CheckoutOrderDetails extends StatelessWidget {
-  const CheckoutOrderDetails({Key? key}) : super(key: key);
+  const CheckoutOrderDetails({super.key});
 
   @override
   Widget build(BuildContext context) {

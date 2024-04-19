@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 
 import '../../../controllers/database_controller.dart';
@@ -71,9 +70,9 @@ class _AddShippingAddressPageState extends State<AddShippingAddressPage> {
       }
     } catch (e) {
       MainDialog(
-          context: context,
-          title: 'Error Saving Address',
-          content: e.toString())
+              context: context,
+              title: 'Error Saving Address',
+              content: e.toString())
           .showAlertDialog();
     }
   }
@@ -88,7 +87,7 @@ class _AddShippingAddressPageState extends State<AddShippingAddressPage> {
           shippingAddress != null
               ? 'Editing Shipping Address'
               : 'Adding Shipping Address',
-          style: Theme.of(context).textTheme.subtitle1,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         centerTitle: true,
       ),
@@ -97,7 +96,7 @@ class _AddShippingAddressPageState extends State<AddShippingAddressPage> {
           key: _formKey,
           child: Padding(
             padding:
-            const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
+                const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
             child: Column(
               children: [
                 TextFormField(
@@ -108,7 +107,7 @@ class _AddShippingAddressPageState extends State<AddShippingAddressPage> {
                     filled: true,
                   ),
                   validator: (value) =>
-                  value!.isNotEmpty ? null : 'Please enter your name',
+                      value!.isNotEmpty ? null : 'Please enter your name',
                 ),
                 const SizedBox(height: 16.0),
                 TextFormField(
@@ -119,7 +118,7 @@ class _AddShippingAddressPageState extends State<AddShippingAddressPage> {
                     filled: true,
                   ),
                   validator: (value) =>
-                  value!.isNotEmpty ? null : 'Please enter your name',
+                      value!.isNotEmpty ? null : 'Please enter your name',
                 ),
                 const SizedBox(height: 16.0),
                 TextFormField(
@@ -130,7 +129,7 @@ class _AddShippingAddressPageState extends State<AddShippingAddressPage> {
                     filled: true,
                   ),
                   validator: (value) =>
-                  value!.isNotEmpty ? null : 'Please enter your name',
+                      value!.isNotEmpty ? null : 'Please enter your name',
                 ),
                 const SizedBox(height: 16.0),
                 TextFormField(
@@ -141,9 +140,8 @@ class _AddShippingAddressPageState extends State<AddShippingAddressPage> {
                     filled: true,
                   ),
                   validator: (value) =>
-                  value!.isNotEmpty ? null : 'Please enter your number',
+                      value!.isNotEmpty ? null : 'Please enter your number',
                 ),
-                
                 MainButton(
                   text: 'Save Address',
                   onTap: () => saveAddress(database),

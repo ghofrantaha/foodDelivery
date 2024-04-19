@@ -1,4 +1,3 @@
-
 import '../utilities/assets.dart';
 
 class Product {
@@ -9,11 +8,13 @@ class Product {
   final int? discountValue;
   final String category;
   final int? rate;
+  final int calories;
   Product({
     required this.id,
     required this.title,
     required this.price,
     required this.imgUrl,
+    required this.calories,
     this.discountValue,
     this.category = 'Other',
     this.rate,
@@ -28,6 +29,7 @@ class Product {
       'discountValue': discountValue,
       'category': category,
       'rate': rate,
+      'calories': calories,
     };
   }
 
@@ -40,6 +42,7 @@ class Product {
       price: map['price'],
       title: map['title'],
       rate: map['rate'],
+      calories: map['calories']
     );
   }
 }
@@ -52,6 +55,7 @@ List<Product> productsList = [
     imgUrl: AppAssets.tempProductAsset1,
     category: 'Crepe    ',
     discountValue: 20,
+    calories: 23,
   ),
   Product(
     id: '1',
@@ -60,6 +64,7 @@ List<Product> productsList = [
     imgUrl: AppAssets.tempProductAsset2,
     category: 'cake   ',
     discountValue: 20,
+    calories: 96,
   ),
   Product(
     id: '2',
@@ -68,6 +73,7 @@ List<Product> productsList = [
     imgUrl: AppAssets.tempProductAsset6,
     category: 'burger ',
     discountValue: 20,
+    calories: 36,
   ),
   Product(
     id: '3',
@@ -76,15 +82,7 @@ List<Product> productsList = [
     imgUrl: AppAssets.tempProductAsset3,
     category: 'mandi chicken ',
     discountValue: 20,
-  ),
-
-  Product(
-    id: '3',
-    title: 'Khan.mandi',
-    price: 30,
-    imgUrl: AppAssets.tempProductAsset3,
-    category: 'mandi chicken ',
-    discountValue: 20,
+    calories: 85,
   ),
   Product(
     id: '3',
@@ -93,6 +91,16 @@ List<Product> productsList = [
     imgUrl: AppAssets.tempProductAsset3,
     category: 'mandi chicken ',
     discountValue: 20,
+    calories: 96
+  ),
+  Product(
+    id: '3',
+    title: 'Khan.mandi',
+    price: 30,
+    imgUrl: AppAssets.tempProductAsset3,
+    category: 'mandi chicken ',
+    discountValue: 20,
+    calories: 89
   ),
   Product(
     id: '4',
@@ -100,6 +108,7 @@ List<Product> productsList = [
     price: 7,
     imgUrl: AppAssets.tempProductAsset4,
     category: 'Oreo milkshake ',
+    calories: 50
   ),
   Product(
     id: '5',
@@ -108,6 +117,7 @@ List<Product> productsList = [
     imgUrl: AppAssets.tempProductAsset5,
     category: 'Dolma ',
     discountValue: 20,
+    calories: 63
   ),
   Product(
     id: '5',
@@ -116,6 +126,7 @@ List<Product> productsList = [
     imgUrl: AppAssets.tempProductAsset7,
     category: 'mandi meat ',
     discountValue: 20,
+    calories: 110
   ),
   Product(
     id: '5',
@@ -124,5 +135,6 @@ List<Product> productsList = [
     imgUrl: AppAssets.tempProductAsset8,
     category: 'Zenker ',
     discountValue: 20,
+    calories: 98
   ),
 ];

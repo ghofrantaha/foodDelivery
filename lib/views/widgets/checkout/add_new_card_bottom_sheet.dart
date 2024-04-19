@@ -52,7 +52,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
                 validator: (value) => value != null && value.isEmpty
                     ? 'Please enter your name'
                     : null,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Name on Card',
                   border: OutlineInputBorder(),
                 ),
@@ -78,7 +78,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
                     _cardNumberController.text = value.substring(0, 19);
                   }
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Card Number',
                   border: OutlineInputBorder(),
                 ),
@@ -103,7 +103,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
                     _expireDateController.text = value.substring(0, 5);
                   }
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Expire Date',
                   border: OutlineInputBorder(),
                 ),
@@ -125,7 +125,7 @@ class _AddNewCardBottomSheetState extends State<AddNewCardBottomSheet> {
                   }
                 },
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'CVV',
                   border: OutlineInputBorder(),
                 ),

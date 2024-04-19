@@ -6,7 +6,6 @@ import '../../../models/shipping_address.dart';
 import '../../../utilities/args_models/add_shipping_address_args.dart';
 import '../../../utilities/routes.dart';
 import '../../widgets/checkout/shipping_address_state_item.dart';
-import 'checkout.dart';
 
 class ShippingAddressesPage extends StatefulWidget {
   const ShippingAddressesPage({super.key});
@@ -24,7 +23,7 @@ class _ShippingAddressesPageState extends State<ShippingAddressesPage> {
       appBar: AppBar(
         title: Text(
           'Shipping Addresses',
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         centerTitle: true,
       ),
@@ -40,8 +39,8 @@ class _ShippingAddressesPageState extends State<ShippingAddressesPage> {
                     children: shippingAddresses!
                         .map(
                           (shippingAddress) => ShippingAddressStateItem(
-                          shippingAddress: shippingAddress),
-                    )
+                              shippingAddress: shippingAddress),
+                        )
                         .toList(),
                   );
                 }

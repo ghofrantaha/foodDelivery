@@ -9,4 +9,5 @@ class AppRoutes{
   static const String shippingAddressesRoute = '/checkout/shipping-addresses';
   static const String addShippingAddressRoute = '/checkout/add-shipping-address';
   static const String paymentMethodsRoute = '/checkout/payment-methods';
+  static const String ordersRoute = '/orders_page';
 }

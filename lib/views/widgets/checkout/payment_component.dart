@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../utilities/assets.dart';
 
 class PaymentComponent extends StatelessWidget {
-  const PaymentComponent({Key? key}) : super(key: key);
+  const PaymentComponent({super.key});
 
   @override
   Widget build(BuildContext context) {
