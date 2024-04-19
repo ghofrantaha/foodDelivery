@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
                       child: const Icon(
                         Icons.search,
                         size: 35,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                   ],

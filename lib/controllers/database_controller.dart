@@ -66,8 +66,8 @@ class FirestoreDatabase implements Database {
       );
 
   @override
-  Future<void> removeFromCart(String productId) async => _service.deleteData(
-        path: ApiPath.addToFav(uid, productId),
+  Future<void> removeFromCart(String productId) async =>  _service.deleteData(
+        path: ApiPath.addToCart(uid, productId),
       );
 
   @override

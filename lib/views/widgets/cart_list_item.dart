@@ -1,16 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/controllers/database_controller.dart';
+import 'package:foodapp/utilities/media_query_extension.dart';
 import 'package:foodapp/views/widgets/main_dialog.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/add_to_cart_model.dart';
 
-class CartListItem extends StatelessWidget {
+class CartListItem extends StatefulWidget {
   final AddToCartModel cartItem;
   const CartListItem({
     super.key,
     required this.cartItem,
   });
+
+  @override
+  State<CartListItem> createState() => _CartListItemState();
+}
+
+class _CartListItemState extends State<CartListItem> {
+  Future<void> _removefromCart(Database database) async {
+    try {
+      await database.removeFromCart(widget.cartItem.id);
+    } catch (e) {
+      return MainDialog(
+        context: context,
+        title: 'Error',
+        content: 'Couldn\'t removing from Favorites, please try again!',
+      ).showAlertDialog();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +48,10 @@ class CartListItem extends StatelessWidget {
                 bottomLeft: Radius.circular(16.0),
               ),
               child: Image.network(
-                cartItem.imgUrl,
+                widget.cartItem.imgUrl,
                 fit: BoxFit.cover,
+                width: context.width * 0.35,
+                height: context.height * 0.3,
               ),
             ),
             Expanded(
@@ -42,62 +62,11 @@ class CartListItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      cartItem.title,
-                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
-                    const SizedBox(height: 4.0),
-                    Row(
-                      children: [
-                        Text.rich(
-                          TextSpan(
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: 'Color: ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(
-                                        color: Colors.grey,
-                                      )),
-                              TextSpan(
-                                text: cartItem.color,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(
-                                      color: Colors.black,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 8.0),
-                        Text.rich(
-                          TextSpan(
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: 'Size: ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .copyWith(
-                                        color: Colors.grey,
-                                      )),
-                              TextSpan(
-                                text: cartItem.size,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall!
-                                    .copyWith(
-                                      color: Colors.black,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                      widget.cartItem.title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge!
+                          .copyWith(fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
@@ -113,24 +82,11 @@ class CartListItem extends StatelessWidget {
                 children: [
                   const Icon(Icons.more_vert),
                   IconButton(
-                    onPressed: () async {
-                      try {
-                        await context
-                            .read<Database>()
-                            .removefromFavorites(cartItem.id);
-                      } catch (e) {
-                        MainDialog(
-                          context: context,
-                          title: 'Error',
-                          content:
-                              'Couldn\'t removing from Favorites, please try again!',
-                        ).showAlertDialog();
-                      }
-                    },
+                    onPressed: () => _removefromCart(context.read<Database>()),
                     icon: const Icon(Icons.delete),
                   ),
                   Text(
-                    '${cartItem.price}\$',
+                    '${widget.cartItem.price}\$',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ],

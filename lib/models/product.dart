@@ -8,6 +8,7 @@ class Product {
   final int? discountValue;
   final String category;
   final int? rate;
+  final String description;
   final int calories;
   Product({
     required this.id,
@@ -15,6 +16,7 @@ class Product {
     required this.price,
     required this.imgUrl,
     required this.calories,
+    required this.description,
     this.discountValue,
     this.category = 'Other',
     this.rate,
@@ -30,6 +32,7 @@ class Product {
       'category': category,
       'rate': rate,
       'calories': calories,
+      'description': description
     };
   }
 
@@ -42,7 +45,8 @@ class Product {
       price: map['price'],
       title: map['title'],
       rate: map['rate'],
-      calories: map['calories']
+      calories: map['calories'],
+      description: map['description'],
     );
   }
 }
@@ -52,6 +56,7 @@ List<Product> productsList = [
     id: '1',
     title: '39ertime',
     price: 9,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     imgUrl: AppAssets.tempProductAsset1,
     category: 'Crepe    ',
     discountValue: 20,
@@ -65,6 +70,7 @@ List<Product> productsList = [
     category: 'cake   ',
     discountValue: 20,
     calories: 96,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   ),
   Product(
     id: '2',
@@ -74,6 +80,7 @@ List<Product> productsList = [
     category: 'burger ',
     discountValue: 20,
     calories: 36,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   ),
   Product(
     id: '3',
@@ -83,6 +90,7 @@ List<Product> productsList = [
     category: 'mandi chicken ',
     discountValue: 20,
     calories: 85,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   ),
   Product(
     id: '3',
@@ -91,7 +99,8 @@ List<Product> productsList = [
     imgUrl: AppAssets.tempProductAsset3,
     category: 'mandi chicken ',
     discountValue: 20,
-    calories: 96
+    calories: 96,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   ),
   Product(
     id: '3',
@@ -100,7 +109,8 @@ List<Product> productsList = [
     imgUrl: AppAssets.tempProductAsset3,
     category: 'mandi chicken ',
     discountValue: 20,
-    calories: 89
+    calories: 89,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   ),
   Product(
     id: '4',
@@ -108,7 +118,8 @@ List<Product> productsList = [
     price: 7,
     imgUrl: AppAssets.tempProductAsset4,
     category: 'Oreo milkshake ',
-    calories: 50
+    calories: 50,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   ),
   Product(
     id: '5',
@@ -117,7 +128,8 @@ List<Product> productsList = [
     imgUrl: AppAssets.tempProductAsset5,
     category: 'Dolma ',
     discountValue: 20,
-    calories: 63
+    calories: 63,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   ),
   Product(
     id: '5',
@@ -126,7 +138,8 @@ List<Product> productsList = [
     imgUrl: AppAssets.tempProductAsset7,
     category: 'mandi meat ',
     discountValue: 20,
-    calories: 110
+    calories: 110,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   ),
   Product(
     id: '5',
@@ -135,6 +148,7 @@ List<Product> productsList = [
     imgUrl: AppAssets.tempProductAsset8,
     category: 'Zenker ',
     discountValue: 20,
-    calories: 98
+    calories: 98,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   ),
 ];

@@ -6,7 +6,6 @@ import '../../controllers/database_controller.dart';
 import '../../models/add_to_cart_model.dart';
 import '../../models/product.dart';
 import '../../utilities/constants.dart';
-import '../widgets/drop_down_menu.dart';
 import '../widgets/main_button.dart';
 import '../widgets/main_dialog.dart';
 
@@ -112,112 +111,91 @@ class _ProductDetailsState extends State<ProductDetails> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(
-                        child: SizedBox(
-                          height: 60,
-                          child: DropDownMenuComponent(
-                            items: const [
-                              'S',
-                              'M',
-                              'L',
-                            ],
-                            hint: 'Size',
-                            onChanged: (String? newValue) {
-                              setState(() => dropdownValue = newValue!);
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 90,
+                            width: 130,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Colors.orange),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Energy',
+                                  style: TextStyle(
+                                    color: Colors.orange,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  '${widget.product.calories} KCal',
+                                  style: const TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          Container(
+                            height: 90,
+                            width: 130,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Colors.orange),
+                            ),
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Delivery',
+                                  style: TextStyle(
+                                    color: Colors.orange,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  '45 min',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 60,
+                        width: 60,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: IconButton(
+                            onPressed: () {
+                              if (isFavorite)
+                                _removefromFavorites(context.read<Database>());
+                              else
+                                _addToFavorites(context.read<Database>());
+                              setState(() => isFavorite = !isFavorite);
                             },
+                            icon: Icon(isFavorite
+                                ? Icons.favorite
+                                : Icons.favorite_border_outlined),
+                            color: isFavorite ? Colors.teal : Colors.black45,
+                            iconSize: 30,
                           ),
-                        ),
-                      ),
-                      const Spacer(),
-                      InkWell(
-                        onTap: () {
-                          if (isFavorite)
-                            _removefromFavorites(context.read<Database>());
-                          else
-                            _addToFavorites(context.read<Database>());
-                          setState(() => isFavorite = !isFavorite);
-                        },
-                        child: Container(
-                          height: 60,
-                          width: 60,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Icon(
-                              isFavorite
-                                  ? Icons.favorite
-                                  : Icons.favorite_border_outlined,
-                              color: isFavorite ? Colors.teal : Colors.black45,
-                              size: 30,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        height: 120,
-                        width: 200,
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.orange),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              'Energy',
-                              style: TextStyle(
-                                color: Colors.orange,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              '${widget.product.calories} KCal',
-                              style: const TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 120,
-                        width: 200,
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: Colors.orange),
-                        ),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Delivery',
-                              style: TextStyle(
-                                color: Colors.orange,
-                                fontSize: 30,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              '45 min',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
                         ),
                       ),
                     ],
@@ -251,7 +229,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   const SizedBox(height: 16.0),
                   Text(
-                    'mandi rice, beef, served with bread, sahaouk sauce yogurt pickles and your choice of one type of broth ',
+                    widget.product.description,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   const SizedBox(height: 24.0),
